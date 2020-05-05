@@ -13,6 +13,9 @@
         <module>mall-sys</module>
         <module>mall-web</module>
         <module>mall-admin</module>
+        <module>mall-core</module>
+        <module>mall-core</module>
+        <module>mall-activiti</module>
     </modules>
 
     <parent>

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="mall-admin" />
+        <module name="mall-activiti" />
         <module name="mall-web" />
         <module name="mall-sys" />
         <module name="mall-core" />
@@ -20,6 +21,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="MallSystem" options="" />
+      <module name="mall-activiti" options="-parameters" />
       <module name="mall-admin" options="-parameters" />
       <module name="mall-core" options="-parameters" />
       <module name="mall-sys" options="-parameters" />
