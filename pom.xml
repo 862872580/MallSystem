@@ -7,6 +7,13 @@
     <groupId>org.example</groupId>
     <artifactId>MallSystem</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>mall-core</module>
+        <module>mall-core</module>
+        <module>mall-sys</module>
+        <module>mall-web</module>
+        <module>mall-admin</module>
+    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -65,7 +72,7 @@
         </repository>
     </repositories>
 
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <build>
         <plugins>
             <plugin>
