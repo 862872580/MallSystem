@@ -27,4 +27,9 @@ public class SysUserServiceImpl implements SysUserService {
     public boolean login(String username, String password) {
         return true;
     }
+
+    @Override
+    public SysUserEntity findByName(String username) {
+        return sysUserMapper.selectByName(username);
+    }
 }

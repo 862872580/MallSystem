@@ -14,6 +14,7 @@ public class SysUserEntity {
     private Timestamp createDate;
     private Timestamp updateDate;
     private int delFlag;
+    private int power;
 
     @Id
     @Column(name = "id")
@@ -105,6 +106,16 @@ public class SysUserEntity {
         this.delFlag = delFlag;
     }
 
+    @Basic
+    @Column(name = "power")
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
     @Override
     public int hashCode() {
         int result = id;
@@ -116,6 +127,7 @@ public class SysUserEntity {
         result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
         result = 31 * result + (updateDate != null ? updateDate.hashCode() : 0);
         result = 31 * result + delFlag;
+        result = 31 * result + power;
         return result;
     }
 
@@ -131,6 +143,7 @@ public class SysUserEntity {
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
                 ", delFlag=" + delFlag +
+                ", power=" + power +
                 '}';
     }
 }
