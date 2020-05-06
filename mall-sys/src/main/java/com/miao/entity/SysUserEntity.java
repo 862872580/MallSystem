@@ -107,26 +107,6 @@ public class SysUserEntity {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysUserEntity that = (SysUserEntity) o;
-
-        if (id != that.id) return false;
-        if (delFlag != that.delFlag) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (age != null ? !age.equals(that.age) : that.age != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (realname != null ? !realname.equals(that.realname) : that.realname != null) return false;
-        if (createDate != null ? !createDate.equals(that.createDate) : that.createDate != null) return false;
-        if (updateDate != null ? !updateDate.equals(that.updateDate) : that.updateDate != null) return false;
-
-        return true;
-    }
-
-    @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (username != null ? username.hashCode() : 0);
@@ -138,5 +118,20 @@ public class SysUserEntity {
         result = 31 * result + (updateDate != null ? updateDate.hashCode() : 0);
         result = 31 * result + delFlag;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SysUserEntity{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", realname='" + realname + '\'' +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", delFlag=" + delFlag +
+                '}';
     }
 }

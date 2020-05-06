@@ -15,13 +15,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * @email 154040976@qq.com
  */
 
-@EnableWebMvc
-@EnableTransactionManagement
 @ComponentScan("com.miao")
 @MapperScan(basePackages = {"com.miao.mapper"})
-@EnableAutoConfiguration(exclude = {
-        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
-})
+@EnableAutoConfiguration
 public class Application {
 
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package com.miao.util;
 
 
-import com.alibaba.fastjson.JSONObject;
+import net.minidev.json.JSONObject;
 
 /**
  * @author zhuxiaomeng

@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mall-activiti" />
         <module name="mall-admin" />
-        <module name="mall-core" />
-        <module name="mall-sys" />
+        <module name="mall-activiti" />
         <module name="mall-web" />
+        <module name="mall-sys" />
+        <module name="mall-core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

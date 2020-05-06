@@ -1,51 +1,14 @@
 server:
   port: 8081
 spring:
-  devtools:
-    restart:
-      enabled: true
   datasource:
-    url: jdbc:mysql://localhost:3306/lenos?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/mallsystem?useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: 123456
-  http:
-    encoding:
-      force: true
-  boot:
-    admin:
-      client:
-        prefer-ip: true
-      url: http://localhost:8082
-
-mybatis:
-  type-aliases-package: com.len.entity
-  mapper-locations: classpath*:mapper/*.xml
-  check-config-location: true
-
-mapper:
-  mappers:
-    - com.len.base.BaseMapper
-    - tk.mybatis.mapper.common.Mapper
-  not-empty: true
-  identity: mysql
+    password: root
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
 
 
-# PageHelperConfig 可以替代此方案
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
 
-lenosp:
-  uploadPath: ./file/
-  isDayType: false
-
-  imagePath: ./image/
-
-logging:
-  file: ./logs/lenosp-log.log
-  level:
-    com.len.mapper: debug
-
-dataType: mysql
