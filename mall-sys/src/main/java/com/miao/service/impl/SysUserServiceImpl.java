@@ -22,4 +22,10 @@ public class SysUserServiceImpl implements SysUserService {
         sysUserMapper.insertUser(sysUserEntity);
         return true;
     }
+
+    @Override
+    public boolean login(String username, String password) {
+        sysUserMapper.selectUser(username, password);
+        return true;
+    }
 }

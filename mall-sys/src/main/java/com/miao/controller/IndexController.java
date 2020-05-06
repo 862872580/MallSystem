@@ -29,14 +29,20 @@ public class IndexController {
         return "register";
     }
 
-    //登陆
-    @PostMapping("login")
-    public String login(){
-        return "welcome";
-    }
 
     @Autowired
     private SysUserService sysUserService;
+
+    //登陆
+    @PostMapping("login")
+    public String login(String username, String password){
+        boolean b = sysUserService.login(username, password);
+        if (b) {
+            return "welcome";
+        }
+        return "error";
+    }
+
     //注册
     @PostMapping("register")
     public String register(SysUserEntity sysUserEntity){

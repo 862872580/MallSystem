@@ -9,4 +9,6 @@ public interface SysUserMapper {
             ", #{realname}, #{createDate}, #{updateDate}" +
             ", #{delFlag})")
     void insertUser(SysUserEntity sysUserEntity);
+
+    void selectUser(String username, String password);
 }
