@@ -3,7 +3,6 @@ package com.miao.entity;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
 @Table(name = "sys_user", schema = "mallsystem")
 public class SysUserEntity {
     private int id;

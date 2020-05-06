@@ -2,7 +2,9 @@ package com.miao.mapper;
 
 import com.miao.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface SysUserMapper {
     @Insert("insert into sys_user values (#{id}, #{username}" +
             ", #{password}, #{age}, #{email}" +
@@ -10,5 +12,4 @@ public interface SysUserMapper {
             ", #{delFlag})")
     void insertUser(SysUserEntity sysUserEntity);
 
-    void selectUser(String username, String password);
 }
