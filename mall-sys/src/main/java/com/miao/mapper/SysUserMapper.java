@@ -8,7 +8,7 @@ public interface SysUserMapper {
     @Insert("insert into sys_user values (#{id}, #{username}" +
             ", #{password}, #{age}, #{email}" +
             ", #{realname}, #{createDate}, #{updateDate}" +
-            ", #{delFlag})")
+            ", #{delFlag}, #{perms})")
     void insertUser(SysUserEntity sysUserEntity);
 
     @Select("select * from sys_user where username=#{username}")

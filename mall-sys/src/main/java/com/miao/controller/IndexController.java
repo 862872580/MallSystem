@@ -47,11 +47,27 @@ public class IndexController {
     }
 
     /**
+     * @return 跳转到未授权页面
+     */
+    @RequestMapping("noAuth")
+    public String noAuth(){
+        return "noAuth";
+    }
+
+    /**
      * @return 跳转到欢迎页面
      */
     @RequestMapping("welcome")
     public String welcome(){
         return "welcome";
+    }
+
+    /**
+     * @return 跳转到会员页面
+     */
+    @RequestMapping("vip")
+    public String vip(){
+        return "vip";
     }
 
     /**

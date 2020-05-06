@@ -14,7 +14,7 @@ public class SysUserEntity {
     private Timestamp createDate;
     private Timestamp updateDate;
     private int delFlag;
-    private int power;
+    private String perms;
 
     @Id
     @Column(name = "id")
@@ -107,13 +107,32 @@ public class SysUserEntity {
     }
 
     @Basic
-    @Column(name = "power")
-    public int getPower() {
-        return power;
+    @Column(name = "perms")
+    public String getPerms() {
+        return perms;
     }
 
-    public void setPower(int power) {
-        this.power = power;
+    public void setPerms(String perms) {
+        this.perms = perms;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SysUserEntity that = (SysUserEntity) o;
+
+        if (id != that.id) return false;
+        if (delFlag != that.delFlag) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (age != null ? !age.equals(that.age) : that.age != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (realname != null ? !realname.equals(that.realname) : that.realname != null) return false;
+        if (createDate != null ? !createDate.equals(that.createDate) : that.createDate != null) return false;
+        if (updateDate != null ? !updateDate.equals(that.updateDate) : that.updateDate != null) return false;
+        return perms != null ? perms.equals(that.perms) : that.perms == null;
     }
 
     @Override
@@ -127,7 +146,7 @@ public class SysUserEntity {
         result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
         result = 31 * result + (updateDate != null ? updateDate.hashCode() : 0);
         result = 31 * result + delFlag;
-        result = 31 * result + power;
+        result = 31 * result + (perms != null ? perms.hashCode() : 0);
         return result;
     }
 
@@ -143,7 +162,7 @@ public class SysUserEntity {
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
                 ", delFlag=" + delFlag +
-                ", power=" + power +
+                ", perms='" + perms + '\'' +
                 '}';
     }
 }

@@ -2,11 +2,13 @@ package com.miao.shiro;
 
 import com.miao.entity.SysUserEntity;
 import com.miao.service.SysUserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -30,11 +32,10 @@ public class UserRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
         //添加资源的授权字符串
-        //info.addStringPermission("user:welcome");
-        //info.addStringPermission("user:fail");
-//        Subject subject = SecurityUtils.getSubject();
-//        SysUserEntity user = (SysUserEntity) subject.getPrincipal();
-//        info.addStringPermission(user.getPerms());
+        //info.addStringPermission("sysUser:vip");
+        Subject subject = SecurityUtils.getSubject();
+        SysUserEntity sysUserEntity = (SysUserEntity) subject.getPrincipal();
+        info.addStringPermission(sysUserEntity.getPerms());
 
         return info;
     }
