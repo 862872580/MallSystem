@@ -123,7 +123,7 @@ public class IndexController {
 
     /**
      * 登陆
-     * @param user 用户
+     * @param sysUserEntity 用户
      * @param model 返回给前端msg
      * @return
      */
