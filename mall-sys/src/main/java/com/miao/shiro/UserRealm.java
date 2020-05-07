@@ -48,7 +48,7 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        System.out.println("执行认证逻辑");
+        //System.out.println("执行认证逻辑");
 
         //这里编写shiro判断逻辑, 判断用户名和密码
         //1.判断用户名
@@ -56,8 +56,8 @@ public class UserRealm extends AuthorizingRealm {
 
         SysUserEntity sysUserEntity = service.findByName(token.getUsername());
 
-        if(sysUserEntity == null){
-            //用户名不存在
+        if(sysUserEntity == null || sysUserEntity.getDel_flag() == 0){
+            //用户名不存在或已注销
             return null;
         }
 

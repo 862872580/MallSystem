@@ -6,4 +6,6 @@ public interface SysUserService {
     boolean addUser(SysUserEntity sysUserEntity);
 
     SysUserEntity findByName(String username);
+
+    void openVip();
 }

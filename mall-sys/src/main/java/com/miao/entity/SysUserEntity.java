@@ -1,9 +1,8 @@
 package com.miao.entity;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
-@Table(name = "sys_user", schema = "mallsystem")
 public class SysUserEntity {
     private int id;
     private String username;
@@ -11,13 +10,11 @@ public class SysUserEntity {
     private Integer age;
     private String email;
     private String realname;
-    private Timestamp createDate;
-    private Timestamp updateDate;
-    private int delFlag;
-    private String perms;
+    private Timestamp create_date;
+    private Timestamp update_date;
+    private int del_flag;    //用户是否注销
+    private String perms; //用户权限
 
-    @Id
-    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -26,8 +23,6 @@ public class SysUserEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "username")
     public String getUsername() {
         return username;
     }
@@ -36,8 +31,6 @@ public class SysUserEntity {
         this.username = username;
     }
 
-    @Basic
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -46,8 +39,6 @@ public class SysUserEntity {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "age")
     public Integer getAge() {
         return age;
     }
@@ -56,8 +47,6 @@ public class SysUserEntity {
         this.age = age;
     }
 
-    @Basic
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -66,8 +55,6 @@ public class SysUserEntity {
         this.email = email;
     }
 
-    @Basic
-    @Column(name = "realname")
     public String getRealname() {
         return realname;
     }
@@ -76,38 +63,31 @@ public class SysUserEntity {
         this.realname = realname;
     }
 
-    @Basic
-    @Column(name = "create_date")
-    public Timestamp getCreateDate() {
-        return createDate;
+    public Timestamp getCreate_date() {
+        return create_date;
     }
 
-    public void setCreateDate(Timestamp createDate) {
-        this.createDate = createDate;
+    public void setCreate_date(Timestamp create_date) {
+        this.create_date = create_date;
     }
 
-    @Basic
-    @Column(name = "update_date")
-    public Timestamp getUpdateDate() {
-        return updateDate;
+    public Timestamp getUpdate_date() {
+        return update_date;
     }
 
-    public void setUpdateDate(Timestamp updateDate) {
-        this.updateDate = updateDate;
+    public void setUpdate_date(Timestamp update_date) {
+        this.update_date = update_date;
     }
 
-    @Basic
-    @Column(name = "del_flag")
-    public int getDelFlag() {
-        return delFlag;
+    public int getDel_flag() {
+        return del_flag;
     }
 
-    public void setDelFlag(int delFlag) {
-        this.delFlag = delFlag;
+    public void setDel_flag(int del_flag) {
+        this.del_flag = del_flag;
     }
 
-    @Basic
-    @Column(name = "perms")
+
     public String getPerms() {
         return perms;
     }
@@ -118,36 +98,28 @@ public class SysUserEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SysUserEntity that = (SysUserEntity) o;
-
-        if (id != that.id) return false;
-        if (delFlag != that.delFlag) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (age != null ? !age.equals(that.age) : that.age != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (realname != null ? !realname.equals(that.realname) : that.realname != null) return false;
-        if (createDate != null ? !createDate.equals(that.createDate) : that.createDate != null) return false;
-        if (updateDate != null ? !updateDate.equals(that.updateDate) : that.updateDate != null) return false;
-        return perms != null ? perms.equals(that.perms) : that.perms == null;
+        return id == that.id &&
+                del_flag == that.del_flag &&
+                Objects.equals(username, that.username) &&
+                Objects.equals(password, that.password) &&
+                Objects.equals(age, that.age) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(realname, that.realname) &&
+                Objects.equals(create_date, that.create_date) &&
+                Objects.equals(update_date, that.update_date) &&
+                Objects.equals(perms, that.perms);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (age != null ? age.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (realname != null ? realname.hashCode() : 0);
-        result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
-        result = 31 * result + (updateDate != null ? updateDate.hashCode() : 0);
-        result = 31 * result + delFlag;
-        result = 31 * result + (perms != null ? perms.hashCode() : 0);
-        return result;
+        return Objects.hash(id, username, password, age, email, realname, create_date, update_date, del_flag, perms);
     }
 
     @Override
@@ -159,9 +131,9 @@ public class SysUserEntity {
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", realname='" + realname + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", delFlag=" + delFlag +
+                ", create_date=" + create_date +
+                ", update_date=" + update_date +
+                ", del_flag=" + del_flag +
                 ", perms='" + perms + '\'' +
                 '}';
     }

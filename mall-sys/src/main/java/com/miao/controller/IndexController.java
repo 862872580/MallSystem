@@ -23,7 +23,7 @@ public class IndexController {
      *
      * @return 初始页面
      */
-    @RequestMapping("index")
+    @RequestMapping("/user/index")
     public String index(){
         return "index";
     }
@@ -32,7 +32,7 @@ public class IndexController {
      *
      * @return 跳转到登陆页面
      */
-    @RequestMapping("login_page")
+    @RequestMapping("/user/login_page")
     public String login_page(){
         return "login";
     }
@@ -41,7 +41,7 @@ public class IndexController {
      *
      * @return 跳转到注册页面
      */
-    @RequestMapping("register_page")
+    @RequestMapping("/user/register_page")
     public String register_page(){
         return "register";
     }
@@ -49,7 +49,7 @@ public class IndexController {
     /**
      * @return 跳转到未授权页面
      */
-    @RequestMapping("noAuth")
+    @RequestMapping("/user/noAuth")
     public String noAuth(){
         return "noAuth";
     }
@@ -57,7 +57,7 @@ public class IndexController {
     /**
      * @return 跳转到欢迎页面
      */
-    @RequestMapping("welcome")
+    @RequestMapping("/user/welcome")
     public String welcome(){
         return "welcome";
     }
@@ -65,8 +65,27 @@ public class IndexController {
     /**
      * @return 跳转到会员页面
      */
-    @RequestMapping("vip")
+    @RequestMapping("/user/vip")
     public String vip(){
+        return "vip";
+    }
+
+    /**
+     * @return 跳转到会员开通页面
+     */
+    @RequestMapping("/user/open_vip_page")
+    public String open_vip_page(){
+        return "openvip";
+    }
+
+    /**
+     * 开通会员
+     * @param
+     * @return
+     */
+    @RequestMapping("/user/openvip")
+    public String openvip(){
+        sysUserService.openVip();
         return "vip";
     }
 
@@ -76,25 +95,38 @@ public class IndexController {
      * @return 成功跳转到登录页面
      * 失败跳转到错误页面
      */
-    @PostMapping("register")
-    public String register(SysUserEntity sysUserEntity){
+    @PostMapping("/user/register")
+    public String register(SysUserEntity sysUserEntity, Model model){
+        if (sysUserEntity.getUsername() == ""){
+            model.addAttribute("msg", "用户名不能为空");
+            return "register";
+        }
         boolean b = sysUserService.addUser(sysUserEntity);
         if (b) {
             return "login";
         }
-        return "error";
+        model.addAttribute("msg", "用户名已存在");
+        return "register";
     }
 
-    //登出
-    @RequestMapping("/logout")
+    /**
+     * 登出
+     * @return 登出页面
+     */
+    @RequestMapping("/user/logout")
     public String logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return "logout";
     }
 
-    //登陆
-    @PostMapping("login")
+    /**
+     * 登陆
+     * @param user 用户
+     * @param model 返回给前端msg
+     * @return
+     */
+    @PostMapping("/user/login")
     public String login(SysUserEntity user, Model model){
 
         /**
@@ -111,11 +143,11 @@ public class IndexController {
             subject.login(token);
             //登录成功
             //跳转到welcome.jsp
-            return "redirect:welcome";
+            return "redirect:/user/welcome";
         }catch (UnknownAccountException e){
             //e.printStackTrace();
             //登录失败: 用户名不存在
-            model.addAttribute("msg", "用户名不存在");
+            model.addAttribute("msg", "用户名不存在或已注销");
             return "login";
         }catch (IncorrectCredentialsException e){
             model.addAttribute("msg", "密码错误");

@@ -35,29 +35,32 @@ public class ShiroConfig {
 
         //anon必须在filterMap.put("/*", "authc");之前否则无效
 
+        //放行/index
+        filterMap.put("/user/index", "anon");
+
         //放行/login_page
-        filterMap.put("/login_page", "anon");
+        filterMap.put("/user/login_page", "anon");
 
         //放行/register_page
-        filterMap.put("/register_page", "anon");
+        filterMap.put("/user/register_page", "anon");
 
         //放行/login
-        filterMap.put("/login", "anon");
+        filterMap.put("/user/login", "anon");
 
         //放行/register
-        filterMap.put("/register", "anon");
+        filterMap.put("/user/register", "anon");
 
         //授权过滤器
-        filterMap.put("/vip", "perms[sysUser:vip]");
+        filterMap.put("/user/vip", "perms[sysUser:vip]");
 
         //使用通配符* 例子:("/user/*")
-        filterMap.put("/*", "authc");
+        filterMap.put("/user/*", "authc");
 
         //修改跳转到登录页面
-        shiroFilterFactoryBean.setLoginUrl("/login_page");
+        shiroFilterFactoryBean.setLoginUrl("/user/login_page");
 
         //设置为授权提示页面
-        shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/user/noAuth");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
