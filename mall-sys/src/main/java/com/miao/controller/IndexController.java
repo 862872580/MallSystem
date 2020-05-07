@@ -2,6 +2,7 @@ package com.miao.controller;
 
 import com.miao.entity.SysUserEntity;
 import com.miao.service.SysUserService;
+import com.miao.util.Md5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -127,7 +128,7 @@ public class IndexController {
      * @return
      */
     @PostMapping("/user/login")
-    public String login(SysUserEntity user, Model model){
+    public String login(SysUserEntity sysUserEntity, Model model){
 
         /**
          * 使用Shiro编写认证操作
@@ -135,8 +136,11 @@ public class IndexController {
         //1.获取Subject
         Subject subject = SecurityUtils.getSubject();
 
-        //2.封装用户数据
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
+        //2.封装用户数据,并且把密码进行加密,然后比对
+        String md5paassword = Md5Util.getMD5(sysUserEntity.getPassword(),sysUserEntity.getUsername());
+        sysUserEntity.setPassword(md5paassword);
+
+        UsernamePasswordToken token = new UsernamePasswordToken(sysUserEntity.getUsername(), sysUserEntity.getPassword());
 
         //3.执行登录方法
         try {

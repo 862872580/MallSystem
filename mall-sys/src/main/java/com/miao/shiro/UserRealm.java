@@ -2,6 +2,7 @@ package com.miao.shiro;
 
 import com.miao.entity.SysUserEntity;
 import com.miao.service.SysUserService;
+import com.miao.util.Md5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -10,6 +11,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import sun.security.provider.MD5;
 
 /**
  * 自定义Realm
@@ -51,7 +53,7 @@ public class UserRealm extends AuthorizingRealm {
         //System.out.println("执行认证逻辑");
 
         //这里编写shiro判断逻辑, 判断用户名和密码
-        //1.判断用户名
+        //1.判断用户名是否存在
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 
         SysUserEntity sysUserEntity = service.findByName(token.getUsername());

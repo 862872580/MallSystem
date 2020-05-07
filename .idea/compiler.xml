@@ -14,7 +14,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="mall-core" target="1.8" />
       <module name="Mall-System" target="1.5" />
     </bytecodeTargetLevel>
   </component>

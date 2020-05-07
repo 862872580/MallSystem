@@ -3,6 +3,7 @@ package com.miao.service.impl;
 import com.miao.entity.SysUserEntity;
 import com.miao.mapper.SysUserMapper;
 import com.miao.service.SysUserService;
+import com.miao.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,10 @@ public class SysUserServiceImpl implements SysUserService {
             Timestamp createTime = new Timestamp(new Date().getTime());
             sysUserEntity.setCreate_date(createTime);
             sysUserEntity.setUpdate_date(createTime);
+
+            //把密码进行加密
+            String Md5password = Md5Util.getMD5(sysUserEntity.getPassword(), sysUserEntity.getUsername());
+            sysUserEntity.setPassword(Md5password);
 
             sysUserMapper.insertUser(sysUserEntity);
             return true;
