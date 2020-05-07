@@ -1,14 +1,30 @@
 package com.miao.entity;
 
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 public class SysUserEntity {
+
     private int id;
+
+    @NotNull(message = "姓名不能为空")
+    @Size(min = 3, max = 18, message = "姓名长度应在{min}-{max}个字符")
     private String username;
+
+    @NotNull(message = "密码不能为空")
+    @Size(min = 9, max = 18, message = "密码长度应在{min}-{max}个字符")
     private String password;
+
+
+    @Range(min = 1, max = 150, message = "年龄必须为{min}-{max}岁")
     private Integer age;
+
+    @Email
     private String email;
+
     private String realname;
     private Timestamp create_date;
     private Timestamp update_date;

@@ -7,10 +7,14 @@
     <h3>注册</h3>
     <font color="red"><strong th:text="${msg}"></strong></font>
     <form method="post" action="/user/register">
-        用户名:<input type="text" name="username"/><br/>
-        密码:<input type="text" name="password"/><br/>
-        年龄:<input type="text" name="age"/><br/>
-        邮箱:<input type="text" name="email"/><br/>
+        用户名:<input type="text" name="username"/>
+        <font color="red"><strong th:text="${usernameErrorMSG}"></strong></font><br/>
+        密码:<input type="text" name="password"/>
+        <font color="red"><strong th:text="${passwordErrorMSG}"></strong></font><br/>
+        年龄:<input type="text" name="age"/>
+        <font color="red"><strong th:text="${ageErrorMSG}"></strong></font><br/>
+        邮箱:<input type="text" name="email"/>
+        <font color="red"><strong th:text="${emailErrorMSG}"></strong></font><br/>
         真实姓名:<input type="text" name="realname"/><br/>
         <input type="hidden" name="del_flag" value="1"/>
         <input type="hidden" name="perms" value="common"/>

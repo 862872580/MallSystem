@@ -66,10 +66,12 @@
             <version>1.11</version>
         </dependency>
 
+        <!--        访问html-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
     </dependencies>
 
     <repositories>

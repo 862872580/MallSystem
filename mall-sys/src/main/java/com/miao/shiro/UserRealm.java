@@ -2,7 +2,6 @@ package com.miao.shiro;
 
 import com.miao.entity.SysUserEntity;
 import com.miao.service.SysUserService;
-import com.miao.util.Md5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -11,7 +10,6 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import sun.security.provider.MD5;
 
 /**
  * 自定义Realm
