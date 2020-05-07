@@ -17,4 +17,7 @@ public interface SysUserMapper {
 
     @Update("update sys_user set update_date = #{update_date} , perms = #{perms} where username = #{username}")
     boolean updateUser(SysUserEntity sysUserEntity);
+
+    @Update("update sys_user set update_date = #{update_date} , password = #{password} where username = #{username}")
+    void updateUserPassword(SysUserEntity sysUserEntity);
 }

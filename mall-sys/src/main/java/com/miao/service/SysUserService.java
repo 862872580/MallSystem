@@ -8,4 +8,6 @@ public interface SysUserService {
     SysUserEntity findByName(String username);
 
     void openVip();
+
+    boolean changePassword(String password, String newpassword);
 }

@@ -52,4 +52,34 @@ public class SysUserServiceImpl implements SysUserService {
         sysUserEntity.setUpdate_date(createTime);
         sysUserMapper.updateUser(sysUserEntity);
     }
+
+    @Override
+    public boolean changePassword(String password, String newpassword) {
+
+        //获取当前用户数据
+        SysUserEntity sysUserEntity = (SysUserEntity) getSubject().getPrincipal();
+        String username = sysUserEntity.getUsername();
+
+        //新密码不能与旧密码相同
+        if (!password.equals(newpassword)) {
+            //判断密码是否正确
+            String md5password = Md5Util.getMD5(password, username);
+            System.out.println(sysUserEntity.getPassword());
+            System.out.println(md5password);
+            if (!sysUserEntity.getPassword().equals(md5password)) {
+                //密码不正确
+                System.out.println("密码不正确");
+                return false;
+            }
+            //密码正确: 设置新密码
+            String newMd5password = Md5Util.getMD5(newpassword, username);
+            sysUserEntity.setPassword(newMd5password);
+            sysUserMapper.updateUserPassword(sysUserEntity);
+            System.out.println("修改密码完毕");
+            return true;
+        }
+        System.out.println("新密码不能与旧密码相同");
+        return false;
+    }
+
 }
