@@ -1,6 +1,8 @@
 package com.miao.config;
 
-import com.miao.shiro.UserRealm;
+import com.miao.config.RedisCache.ShiroRedisCacheManager;
+import com.miao.core.shiro.UserRealm;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -81,6 +83,14 @@ public class ShiroConfig {
     @Bean(name = "userRealm")
     public UserRealm getRealm(){
         return new UserRealm();
+    }
+
+    //Redis实现Session缓存；jedis
+    //CacheManager导入Shiro
+    //未启用:目的解决session共享
+    @Bean
+    public CacheManager RedisCacheManager(){
+        return new ShiroRedisCacheManager();
     }
 
 }

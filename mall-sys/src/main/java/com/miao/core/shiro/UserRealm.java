@@ -1,4 +1,4 @@
-package com.miao.shiro;
+package com.miao.core.shiro;
 
 import com.miao.entity.SysUserEntity;
 import com.miao.service.SysUserService;
