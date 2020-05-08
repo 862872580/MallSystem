@@ -17,9 +17,9 @@ public class ScheduledTasks {
     /**
      * 00:00定时任务批量删除
      */
-    //@Scheduled(cron = "0 0 0 */1 * ?")
-    @Scheduled(fixedRate = 5000)
-    public void remove(){
+    @Scheduled(cron = "0 0 0 */1 * ?")
+    //@Scheduled(fixedRate = 5000)
+    public void clearVip(){
         redisService.clearVip();
         System.out.println("定时任务开启");
     }
