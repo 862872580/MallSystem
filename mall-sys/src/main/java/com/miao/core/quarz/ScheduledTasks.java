@@ -21,6 +21,7 @@ public class ScheduledTasks {
     @Scheduled(fixedRate = 5000)
     public void remove(){
         redisService.clearVip();
+        System.out.println("定时任务开启");
     }
 
 }

@@ -108,6 +108,7 @@ public class RedisServiceImpl implements com.miao.service.RedisService {
         }
         //删除过期数据
         deleteSet(usernames);
+        System.out.println("删除过期数据");
     }
 
 }
