@@ -32,7 +32,7 @@ public class RegisterController {
      * 失败跳转到错误页面
      */
     @PostMapping("/user/register")
-    public String register(@Valid SysUserEntity sysUserEntity, BindingResult br, Model model){
+    public String register(@Valid SysUserEntity sysUserEntity, BindingResult br, Model model,String repassword){
 
         model.addAttribute("sysUserEntity", sysUserEntity);
         int errorCount = br.getErrorCount();
@@ -49,6 +49,11 @@ public class RegisterController {
             if(passwordError != null){
                 String passwordErrorMSG = passwordError.getDefaultMessage();
                 model.addAttribute("passwordErrorMSG", passwordErrorMSG);
+            }
+            if(!repassword.equals(sysUserEntity.getPassword())){
+                String repasswordErrorMSG = "两次密码不一致,请重新输入";
+                model.addAttribute("repasswordErrorMSG", repasswordErrorMSG);
+                return "register";
             }
             if(ageError != null){
                 String ageErrorMSG = ageError.getDefaultMessage();
