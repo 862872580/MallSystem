@@ -14,8 +14,9 @@ spring:
     view:
       prefix: /templates/
       suffix: .html
+    static-path-pattern: /static/**
 
-#redis
+  #redis
   redis:
     database: 0
     database1: 1
@@ -30,5 +31,15 @@ spring:
         max-idle: 8
         min-idle: 0
 
+#mybatis
+mybatis:
+  type-aliases-package: com.miao.entity
+  mapper-locations: classpath:mapper/*.xml
+  check-config-location: true
 
+#log4j
+logging:
+  file: ./logs/mallsystem-log.log
+  level:
+    com.miao.mapper: debug
 

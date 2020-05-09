@@ -12,7 +12,7 @@ public interface SysUserMapper {
             ", #{del_flag}, #{perms})")
     void insertUser(SysUserEntity sysUserEntity);
 
-    @Select("select * from sys_user where username=#{username}")
+    //@Select("select * from sys_user where username=#{username}")
     SysUserEntity selectByName(String username);
 
     @Update("update sys_user set update_date = #{update_date} , perms = #{perms} where username = #{username}")
