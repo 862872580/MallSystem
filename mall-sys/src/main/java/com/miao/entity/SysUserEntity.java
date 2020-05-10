@@ -1,10 +1,7 @@
 package com.miao.entity;
 
-import org.hibernate.validator.constraints.Range;
-
 import javax.validation.constraints.*;
-import java.sql.Timestamp;
-import java.util.Objects;
+import java.sql.Date;
 
 public class SysUserEntity {
 
@@ -15,19 +12,23 @@ public class SysUserEntity {
     private String username;
 
     @NotNull(message = "密码不能为空")
-    @Size(min = 9, max = 18, message = "密码长度应在{min}-{max}个字符")
+    @Size(min = 6, max = 18, message = "密码长度应在{min}-{max}个字符")
     private String password;
 
+    @NotNull(message = "手机号码不能为空")
+    @Pattern(regexp = "^1[34578]\\d{9}$", message = "手机号格式不正确")
+    private String phonenumber;
 
-    @Range(min = 1, max = 150, message = "年龄必须为{min}-{max}岁")
-    private Integer age;
+    private String photo;
+
+    private Date birthday;
 
     @Email
     private String email;
 
     private String realname;
-    private Timestamp create_date;
-    private Timestamp update_date;
+    private Date create_date;
+    private Date update_date;
     private int del_flag;    //用户是否注销
     private String perms; //用户权限
 
@@ -55,12 +56,44 @@ public class SysUserEntity {
         this.password = password;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getPhonenumber() {
+        return phonenumber;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Date getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
+    }
+
+    public Date getUpdate_date() {
+        return update_date;
+    }
+
+    public void setUpdate_date(Date update_date) {
+        this.update_date = update_date;
     }
 
     public String getEmail() {
@@ -77,22 +110,6 @@ public class SysUserEntity {
 
     public void setRealname(String realname) {
         this.realname = realname;
-    }
-
-    public Timestamp getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(Timestamp create_date) {
-        this.create_date = create_date;
-    }
-
-    public Timestamp getUpdate_date() {
-        return update_date;
-    }
-
-    public void setUpdate_date(Timestamp update_date) {
-        this.update_date = update_date;
     }
 
     public int getDel_flag() {
@@ -113,38 +130,14 @@ public class SysUserEntity {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        SysUserEntity that = (SysUserEntity) o;
-        return id == that.id &&
-                del_flag == that.del_flag &&
-                Objects.equals(username, that.username) &&
-                Objects.equals(password, that.password) &&
-                Objects.equals(age, that.age) &&
-                Objects.equals(email, that.email) &&
-                Objects.equals(realname, that.realname) &&
-                Objects.equals(create_date, that.create_date) &&
-                Objects.equals(update_date, that.update_date) &&
-                Objects.equals(perms, that.perms);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, password, age, email, realname, create_date, update_date, del_flag, perms);
-    }
-
-    @Override
     public String toString() {
         return "SysUserEntity{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", age=" + age +
+                ", phonenumber=" + phonenumber +
+                ", photo='" + photo + '\'' +
+                ", birthday=" + birthday +
                 ", email='" + email + '\'' +
                 ", realname='" + realname + '\'' +
                 ", create_date=" + create_date +

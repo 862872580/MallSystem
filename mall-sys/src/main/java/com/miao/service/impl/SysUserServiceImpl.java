@@ -7,8 +7,7 @@ import com.miao.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
 
 import static org.apache.shiro.SecurityUtils.getSubject;
 
@@ -22,9 +21,9 @@ public class SysUserServiceImpl implements SysUserService {
         //判断该用户是否存在
         if (findByName(sysUserEntity.getUsername()) == null) {
             //获取当前时间
-            Timestamp createTime = new Timestamp(new Date().getTime());
-            sysUserEntity.setCreate_date(createTime);
-            sysUserEntity.setUpdate_date(createTime);
+            Date date = new Date(System.currentTimeMillis());
+            sysUserEntity.setCreate_date(date);
+            sysUserEntity.setUpdate_date(date);
 
             //把密码进行加密
             String Md5password = Md5Util.getMD5(sysUserEntity.getPassword(), sysUserEntity.getUsername());
@@ -48,8 +47,8 @@ public class SysUserServiceImpl implements SysUserService {
         String perms = "sysUser:vip";
         sysUserEntity.setPerms(perms);
         //修改更新时间
-        Timestamp createTime = new Timestamp(new Date().getTime());
-        sysUserEntity.setUpdate_date(createTime);
+        Date date = new Date(System.currentTimeMillis());
+        sysUserEntity.setUpdate_date(date);
         sysUserMapper.updateUser(sysUserEntity);
     }
 

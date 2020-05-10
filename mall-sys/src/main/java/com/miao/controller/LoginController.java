@@ -50,7 +50,7 @@ public class LoginController {
             subject.login(token);
             //登录成功
             //跳转到welcome.jsp
-            return "redirect:/user/welcome";
+            return "redirect:/user/index";
         }catch (UnknownAccountException e){
             //e.printStackTrace();
             //登录失败: 用户名不存在

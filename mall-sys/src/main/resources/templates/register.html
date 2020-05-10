@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
-    <title>login</title>
+    <title>注册</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/layui/css/layui.css" media="all">
 </head>
+<script src="/layui/layui.js" charset="utf-8"></script>
 <body>
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
         <legend>注册</legend>
@@ -15,38 +16,45 @@
     <font color="red"><strong th:text="${msg}"></strong></font>
     <form method="post" action="/user/register" class="layui-form">
         <div class="layui-form-item">
-            <label class="layui-form-label">用户名</label>
+            <label class="layui-form-label">用户名 *</label>
             <font color="red"><strong th:text="${usernameErrorMSG}"></strong></font><br/>
             <div class="layui-input-inline">
-                <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                <input type="text" name="username" placeholder="请输入3-18位字符" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
+            <label class="layui-form-label">密码 *</label>
             <font color="red"><strong th:text="${passwordErrorMSG}"></strong></font><br/>
             <div class="layui-input-inline">
-                <input type="text" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                <input type="password" name="password" placeholder="请输入6-18位字符" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">重复密码</label>
+            <label class="layui-form-label">确认密码 *</label>
             <font color="red"><strong th:text="${repasswordErrorMSG}"></strong></font><br/>
             <div class="layui-input-inline">
-                <input type="text" name="repassword" placeholder="请重新输入密码" autocomplete="off" class="layui-input">
+                <input type="password" name="repassword" placeholder="请重新输入密码" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">年龄</label>
-            <font color="red"><strong th:text="${ageErrorMSG}"></strong></font><br/>
+            <label class="layui-form-label">手机号码 *</label>
+            <font color="red"><strong th:text="${phonenumberErrorMSG}"></strong></font><br/>
             <div class="layui-input-inline">
-                <input type="text" name="age" placeholder="请输入年龄" autocomplete="off" class="layui-input">
+                <input type="text" name="phonenumber" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">生日</label>
+            <div class="layui-input-inline">
+                <input type="text" name="birthday" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">邮箱</label>
             <font color="red"><strong th:text="${emailErrorMSG}"></strong></font><br/>
             <div class="layui-input-inline">
-                <input type="text" name="email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                <input type="text" name="email" placeholder="请输入正确的邮箱地址" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -59,9 +67,24 @@
         <input type="hidden" name="perms" value="common"/>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">注册</button>
+                <button type="submit" class="layui-btn" lay-filter="demo1">注册</button>
             </div>
         </div>
     </form>
 </body>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+    });
+</script>
 </html>

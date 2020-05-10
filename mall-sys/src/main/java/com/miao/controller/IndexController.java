@@ -23,16 +23,4 @@ public class IndexController {
         return "noAuth";
     }
 
-    /**
-     * @return 跳转到欢迎页面
-     */
-    @RequestMapping("/user/welcome")
-    public String welcome(){
-        return "welcome";
-    }
-
-
-
-
-
 }
