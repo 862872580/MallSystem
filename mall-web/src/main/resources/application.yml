@@ -38,7 +38,7 @@ mybatis:
 
 #log4j
 logging:
-  file: ./logs/mallsystem-log.log
+  file: ./logs/mallsystem.log
   level:
     com.miao.mapper: debug
 

@@ -23,7 +23,7 @@ public class SysUserEntity {
 
     private Date birthday;
 
-    @Email
+    @Email(message = "邮箱格式不正确")
     private String email;
 
     private String realname;

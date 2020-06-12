@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class RegisterController {
@@ -42,16 +44,26 @@ public class RegisterController {
 
         model.addAttribute("sysUserEntity", sysUserEntity);
         int errorCount = br.getErrorCount();
-        if(errorCount > 0 || !repassword.equals(sysUserEntity.getPassword())){
+
+        //判断两次输入密码是否一致
+        if ( !repassword.equals(sysUserEntity.getPassword())){
             String repasswordErrorMSG = "两次密码不一致,请重新输入";
             model.addAttribute("repasswordErrorMSG", repasswordErrorMSG);
+            errorCount++;
+        }
+        //birthday不输入会报错
+        if (br.getFieldError("birthday") != null){
+            errorCount--;
+        }
 
+
+        if (errorCount > 0){
 
             FieldError usernameError = br.getFieldError("username");
             FieldError passwordError = br.getFieldError("password");
             FieldError phonenumberError = br.getFieldError("phonenumber");
-            FieldError ageError = br.getFieldError("age");
             FieldError emailError = br.getFieldError("email");
+            List<ObjectError> allErrors = br.getAllErrors();
 
             if(usernameError != null){
                 String usernameErrorMSG = usernameError.getDefaultMessage();
@@ -66,18 +78,19 @@ public class RegisterController {
                 String phonenumberErrorMSG = phonenumberError.getDefaultMessage();
                 model.addAttribute("phonenumberErrorMSG", phonenumberErrorMSG);
             }
-            if(ageError != null){
-                String ageErrorMSG = ageError.getDefaultMessage();
-                model.addAttribute("ageErrorMSG", ageErrorMSG);
-            }
             if(emailError != null){
                 String emailErrorMSG = emailError.getDefaultMessage();
                 model.addAttribute("emailErrorMSG", emailErrorMSG);
+                System.out.println(emailErrorMSG);
             }
+            System.out.println("errorCount = " + errorCount);
+            System.out.println(allErrors);
             return "register";
         }
 
+        //添加用户
         boolean b = sysUserService.addUser(sysUserEntity);
+
         if (b) {
 
             //创建用户资料
