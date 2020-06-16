@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50641
-Source Host           : localhost:3306
+Source Server         : my
+Source Server Version : 50728
+Source Host           : 127.0.0.1:3306
 Source Database       : mallsystem
 
 Target Server Type    : MYSQL
-Target Server Version : 50641
+Target Server Version : 50728
 File Encoding         : 65001
 
-Date: 2020-05-07 17:15:38
+Date: 2020-06-12 18:32:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,29 +23,46 @@ CREATE TABLE `sys_user` (
   `id` int(36) NOT NULL AUTO_INCREMENT,
   `username` varchar(64) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `age` int(4) DEFAULT NULL,
+  `phonenumber` varchar(20) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
   `realname` varchar(18) DEFAULT NULL,
-  `create_date` datetime NOT NULL,
-  `update_date` datetime NOT NULL,
+  `create_date` date DEFAULT NULL,
+  `update_date` date DEFAULT NULL,
   `del_flag` int(1) NOT NULL,
   `perms` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'zs', '123456', null, '', '', '2020-05-06 17:11:34', '2020-05-06 17:11:34', '1', 'sysUser:vip');
-INSERT INTO `sys_user` VALUES ('2', 'lisi', '123456', null, '', '', '2020-05-07 10:54:28', '2020-05-07 14:10:23', '1', 'sysUser:vip');
-INSERT INTO `sys_user` VALUES ('3', 'zs1', '123456', null, '', '', '2020-05-07 10:57:08', '2020-05-07 10:57:08', '1', 'common');
-INSERT INTO `sys_user` VALUES ('4', 'zs2', '123456', null, '', '', '2020-05-07 14:20:49', '2020-05-07 14:20:49', '0', 'common');
-INSERT INTO `sys_user` VALUES ('5', 'zs3', '123456', null, '', '', '2020-05-07 14:22:05', '2020-05-07 14:22:05', '0', 'common');
-INSERT INTO `sys_user` VALUES ('6', 'zs4', '123456', null, '', '', '2020-05-07 14:22:58', '2020-05-07 14:22:58', '0', 'common');
-INSERT INTO `sys_user` VALUES ('7', 'zs5', '123456', null, '', '', '2020-05-07 14:25:08', '2020-05-07 14:25:08', '0', 'common');
-INSERT INTO `sys_user` VALUES ('8', 'zs6', '123456', null, '', '', '2020-05-07 14:26:12', '2020-05-07 14:26:12', '0', 'common');
-INSERT INTO `sys_user` VALUES ('9', '', '', null, '', '', '2020-05-07 14:33:18', '2020-05-07 14:33:18', '1', 'common');
-INSERT INTO `sys_user` VALUES ('10', 'zs7', '', null, '', '', '2020-05-07 14:35:12', '2020-05-07 14:35:12', '1', 'common');
-INSERT INTO `sys_user` VALUES ('11', '李小布', '123456', '22', '', '', '2020-05-07 14:50:52', '2020-05-07 14:51:58', '1', 'sysUser:vip');
-INSERT INTO `sys_user` VALUES ('12', 'aa', '0ab44bd43d6b18fcd5cd928d6faab1b8', null, '', '', '2020-05-07 16:26:20', '2020-05-07 16:26:20', '1', 'common');
-INSERT INTO `sys_user` VALUES ('13', 'cc', '1bddc1a2c3f1e97b94a50310ea94308c', null, '', '', '2020-05-07 16:34:25', '2020-05-07 16:34:25', '1', 'common');
+INSERT INTO `sys_user` VALUES ('1', 'zs', '123456', null, null, null, '', '', '2020-05-06', '2020-05-06', '1', 'sysUser:vip');
+INSERT INTO `sys_user` VALUES ('2', 'lisi', '123456', null, null, null, '', '', '2020-05-06', '2020-05-06', '1', 'no');
+INSERT INTO `sys_user` VALUES ('4', 'cc', '1bddc1a2c3f1e97b94a50310ea94308c', null, null, null, '', '', '2020-05-07', '2020-05-07', '1', 'sysUser:vip');
+INSERT INTO `sys_user` VALUES ('5', '123456', '35314df2291a7ba05851ec60beef5a35', null, null, null, '', '', '2020-05-07', '2020-05-07', '1', 'common');
+INSERT INTO `sys_user` VALUES ('7', '777', 'cfff9f8deb54efea304e5a9fa6646157', null, null, null, '', '', '2020-05-09', '2020-05-09', '1', 'common');
+INSERT INTO `sys_user` VALUES ('8', 'miao1', '04d8d3102dadefcebb7799bb9309ff95', '18858312781', null, null, '', '', '2020-05-09', '2020-05-09', '1', 'common');
+INSERT INTO `sys_user` VALUES ('9', '阿萨德啊', '4cc0291918772f21d278f75013cdf0e1', '18858312781', null, '2020-05-06', '', '', '2020-05-09', '2020-05-09', '1', 'common');
+INSERT INTO `sys_user` VALUES ('12', 'miao', '3850b0f93d4d44a3f737681805ab1bec', '18858312781', null, '2020-05-05', '862872580@qq.com', '缪业成', '2020-05-10', '2020-05-10', '1', 'sysUser:vip');
+
+-- ----------------------------
+-- Table structure for sys_userdata
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_userdata`;
+CREATE TABLE `sys_userdata` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) NOT NULL,
+  `nickname` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `sex` int(1) DEFAULT NULL,
+  `label` varchar(255) DEFAULT NULL,
+  `occupation` varchar(32) DEFAULT NULL,
+  `school` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_userdata
+-- ----------------------------
+INSERT INTO `sys_userdata` VALUES ('1', 'miao', '绸缪', '1', '无', 'Java', '金华职业技术学院');
