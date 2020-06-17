@@ -5,6 +5,7 @@ import com.miao.core.shiro.UserRealm;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -72,12 +73,23 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
     /**
+     * 创建DefaultWebSessionManager
+     */
+    @Bean(name = "sessionManager")
+    public DefaultWebSessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        // 设置session过期时间-单位:毫秒
+        sessionManager.setGlobalSessionTimeout(1000*60*30);
+        return sessionManager;
+    }
+    /**
      * 创建DefaultWebSecurityManager
      */
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm){
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(userRealm);
+        securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
     /**
