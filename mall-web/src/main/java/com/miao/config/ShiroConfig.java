@@ -3,6 +3,7 @@ package com.miao.config;
 import com.miao.config.RedisCache.ShiroRedisCacheManager;
 import com.miao.core.shiro.UserRealm;
 import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.session.mgt.eis.MemorySessionDAO;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
@@ -72,6 +73,15 @@ public class ShiroConfig {
 
         return shiroFilterFactoryBean;
     }
+
+
+    // 配置sessionDAO
+    @Bean(name="sessionDAO")
+    public MemorySessionDAO getMemorySessionDAO(){
+        MemorySessionDAO sessionDAO = new MemorySessionDAO();
+        return sessionDAO;
+    }
+
     /**
      * 创建DefaultWebSessionManager
      */
@@ -80,6 +90,7 @@ public class ShiroConfig {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         // 设置session过期时间-单位:毫秒
         sessionManager.setGlobalSessionTimeout(1000*60*30);
+        sessionManager.setSessionDAO(getMemorySessionDAO());
         return sessionManager;
     }
     /**

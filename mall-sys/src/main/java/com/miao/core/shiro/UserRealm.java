@@ -7,9 +7,14 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.eis.MemorySessionDAO;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Collection;
 
 /**
  * 自定义Realm
@@ -18,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserRealm extends AuthorizingRealm {
     @Autowired
     private SysUserService service;
+    @Autowired
+    private SessionDAO sessionDAO;
     /**
      * 执行授权逻辑
      * @param principalCollection
@@ -61,11 +68,36 @@ public class UserRealm extends AuthorizingRealm {
             return null;
         }
 
+        /**
+         * 判断是否已经登录
+         *      已登录将原session剔除,在放入现session
+         */
+        String username = (String)authenticationToken.getPrincipal();
+        String password = new String((char[])authenticationToken.getCredentials());
+
+        //判断密码是否正确
+        if( password.equals( sysUserEntity.getPassword() ) ){
+            // 获取所有session
+            Collection<Session> sessions = sessionDAO.getActiveSessions();
+            for (Session session: sessions) {
+                SysUserEntity sysUser = (SysUserEntity)session.getAttribute("USER_SESSION");
+                // 如果session里面有当前登陆的，则证明是重复登陆的，则将其剔除
+                if( sysUser!=null ){
+                    if( username.equals( sysUser.getUsername() ) ){
+                        session.setTimeout(0);
+                    }
+                }
+            }
+        }
         //2.判断密码
         /**
          * user传递给执行认证逻辑方法
          * user.getPassword()判断密码是否正确
          */
+
+        Session session = SecurityUtils.getSubject().getSession();
+        session.setAttribute("USER_SESSION", sysUserEntity);
+
         return new SimpleAuthenticationInfo(sysUserEntity, sysUserEntity.getPassword(), "");
     }
 }

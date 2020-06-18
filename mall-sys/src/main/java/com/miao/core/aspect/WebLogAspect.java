@@ -31,6 +31,7 @@ public class WebLogAspect {
         HttpServletRequest request = attributes.getRequest();
 
         //记录下请求内容
+        logger.info("-----------------------------------------");
         logger.info("URL : " + request.getRequestURI().toString());
         logger.info("HTTP_METHOD : " + request.getMethod());
         logger.info("IP : " + request.getRemoteAddr());
@@ -39,6 +40,7 @@ public class WebLogAspect {
             String name = enu.nextElement();
             logger.info("name:" + name + ",value:" +request.getParameter(name));
         }
+
     }
 
     @AfterReturning(returning = "ret", pointcut = "webLog()")
