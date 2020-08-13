@@ -1,7 +1,7 @@
 package com.miao.controller;
 
 import com.miao.entity.SysUserEntity;
-import com.miao.util.Md5Util;
+import com.miao.utils.Md5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;

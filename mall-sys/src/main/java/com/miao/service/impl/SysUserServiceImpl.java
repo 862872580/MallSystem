@@ -3,7 +3,7 @@ package com.miao.service.impl;
 import com.miao.entity.SysUserEntity;
 import com.miao.mapper.SysUserMapper;
 import com.miao.service.SysUserService;
-import com.miao.util.Md5Util;
+import com.miao.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

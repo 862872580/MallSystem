@@ -39,6 +39,12 @@ public class ShiroConfig {
 
         //anon必须在filterMap.put("/*", "authc");之前否则无效
 
+        //放行/download_page
+        filterMap.put("/user/download_page", "anon");
+
+        //放行/download_zip
+        filterMap.put("/user/download_zip", "anon");
+
         //放行/test
         filterMap.put("/user/test", "anon");
 

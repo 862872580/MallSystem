@@ -1,4 +1,4 @@
-package com.miao.util;
+package com.miao.utils;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
