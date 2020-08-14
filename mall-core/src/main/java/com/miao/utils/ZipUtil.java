@@ -175,6 +175,55 @@ public class ZipUtil {
     }
   }
 
+  public static void compress(List<File> fileList,String zipFileName){
+
+
+    zipFileName=zipFileName+SUFFIX;//添加文件的后缀名
+
+
+    byte[] buffer=new byte[BUFFER];
+    ZipEntry zipEntry=null;
+    int readLength=0;     //每次读取出来的长度
+
+    try {
+      // 对输出文件做CRC32校验
+      CheckedOutputStream cos = new CheckedOutputStream(new FileOutputStream(
+              zipFileName), new CRC32());
+      ZipOutputStream zos = new ZipOutputStream(cos);
+
+      for(File file:fileList){
+        //获取单个文件路径
+        String filepath = file.getCanonicalPath();
+
+        //若是文件，则压缩文件
+        if(file.isFile()){
+          zipEntry=new ZipEntry(getRelativePath(filepath,file));  //
+          zipEntry.setSize(file.length());
+          zipEntry.setTime(file.lastModified());
+          zos.putNextEntry(zipEntry);
+
+          InputStream is=new BufferedInputStream(new FileInputStream(file));
+
+          while ((readLength=is.read(buffer,0,BUFFER))!=-1){
+            zos.write(buffer,0,readLength);
+          }
+          is.close();
+          System.out.println("file compress:"+file.getCanonicalPath());
+        }else {     //若是空目录，则写入zip条目中
+
+          zipEntry=new ZipEntry(getRelativePath(filepath,file));
+          zos.putNextEntry(zipEntry);
+          System.out.println("dir compress: " + file.getCanonicalPath()+"/");
+        }
+      }
+      zos.close();  //最后得关闭流，不然压缩最后一个文件会出错
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   /**
    * 解压
    * */

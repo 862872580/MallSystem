@@ -1,12 +1,15 @@
 package com.miao.service.impl;
 
 import com.miao.service.DownloadFileService;
+import com.miao.utils.FileUtil;
 import com.miao.utils.ZipUtil;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class DownloadFileServiceImpl implements DownloadFileService {
@@ -21,8 +24,17 @@ public class DownloadFileServiceImpl implements DownloadFileService {
             // 如果文件存在，则进行下载
             if (file.exists()) {
 
+
+                List<File> fileList=new ArrayList<>();
+                File file1 = new File(filepath + "/img.jpg");
+                File file2 = new File(filepath + "/img2.jpg");
+                File file3 = new File("/E:/MallSystem/mall-sys/target/classes/static/jquery/jquery.js");
+                fileList.add(file1);
+                fileList.add(file2);
+                fileList.add(file3);
+
                 //压缩文件
-                ZipUtil.compress(filepath,filepath);
+                ZipUtil.compress(fileList,filepath);
                 File zipFile = new File(filepath+".zip");
 
                 // 配置文件下载
@@ -66,6 +78,12 @@ public class DownloadFileServiceImpl implements DownloadFileService {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    }
+
+                    if (FileUtil.deleteFile(filepath+".zip")){
+                        System.out.println("成功删除:"+filepath+".zip");
+                    }else{
+                        System.out.println("删除失败:"+filepath+".zip");
                     }
                 }
             }
