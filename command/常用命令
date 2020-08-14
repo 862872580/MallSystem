@@ -1,0 +1,2 @@
+设置mysql时区:
+    set global time_zone='+08:00'

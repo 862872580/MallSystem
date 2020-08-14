@@ -1,13 +1,11 @@
 package com.miao.service.impl;
 
-import com.miao.entity.SysUserEntity;
 import com.miao.entity.SysUserdataEntity;
 import com.miao.mapper.SysUserdataMapper;
 import com.miao.service.SysUserdataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static org.apache.shiro.SecurityUtils.getSubject;
 
 @Component
 public class SysUserdataServiceImpl implements SysUserdataService {
