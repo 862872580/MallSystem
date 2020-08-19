@@ -1,3 +1,4 @@
+/**
 package com.miao.exception;
 
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorViewResolver;
@@ -8,11 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-/**
- * @author zhuxiaomeng
- * @date 2018/5/6.
- * @email 154040976@qq.com
- */
 @ControllerAdvice
 public class CustomErrorViewResolver implements ErrorViewResolver {
 
@@ -43,3 +39,4 @@ public class CustomErrorViewResolver implements ErrorViewResolver {
     }
 
 }
+ */

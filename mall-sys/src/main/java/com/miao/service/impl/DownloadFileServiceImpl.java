@@ -11,19 +11,25 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 类作用
+ */
 @Component
 public class DownloadFileServiceImpl implements DownloadFileService {
 
+    /**
+     * 方法作用
+     * @param response  参数名称
+     */
     @Override
     public void DownFile(HttpServletResponse response) {
-        String filename = "images.zip";
+        String filename = "images.zip";  //文件名
         // 如果文件名不为空，则进行下载
         if (filename != null) {
             String filepath = "/E:/MallSystem/mall-sys/target/classes/static/images";
             File file = new File(filepath);
             // 如果文件存在，则进行下载
             if (file.exists()) {
-
 
                 List<File> fileList=new ArrayList<>();
                 File file1 = new File(filepath + "/img.jpg");
