@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author miaoyecheng
- * @date 2020/1/1.
+ * @date 2020/1/1
  * @email 862872580@qq.com
  */
 
