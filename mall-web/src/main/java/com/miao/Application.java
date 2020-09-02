@@ -8,9 +8,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
- * @author zhuxiaomeng
- * @date 2018/1/1.
- * @email 154040976@qq.com
+ * @author miaoyecheng
+ * @date 2020/1/1.
+ * @email 862872580@qq.com
  */
 
 @ComponentScan("com.miao")
